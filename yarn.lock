@@ -2840,7 +2840,7 @@
   optionalDependencies:
     "source-map" "~0.6.1"
 
-"eslint-config-prettier@^6.10.1":
+"eslint-config-prettier@^6.10.1", "eslint-config-prettier@^6.15.0":
   "integrity" "sha512-a1+kOYLR8wMGustcgAjdydMsQ2A/2ipRPwRKUmfYaSxc9ZPcrku080Ctl6zrZzZNs/U82MjSv+qKREkoq3bJaw=="
   "resolved" "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-6.15.0.tgz"
   "version" "6.15.0"
@@ -2874,7 +2874,7 @@
   dependencies:
     "prettier-linter-helpers" "^1.0.0"
 
-"eslint-plugin-react-hooks@^4.0.4":
+"eslint-plugin-react-hooks@^4.0.4", "eslint-plugin-react-hooks@^4.5.0":
   "integrity" "sha512-8k1gRt7D7h03kd+SAAlzXkQwWK22BnK6GKZG+FJA6BAGy22CFvl8kCIXKpVux0cCxMWDQUPqSok0LKaZ0aOcCw=="
   "resolved" "https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.5.0.tgz"
   "version" "4.5.0"
@@ -5697,7 +5697,12 @@
   dependencies:
     "fast-diff" "^1.1.2"
 
-"prettier@^2.0.2", "prettier@>= 1.13.0":
+"prettier-plugin-organize-imports@^2.3.4":
+  "integrity" "sha512-R8o23sf5iVL/U71h9SFUdhdOEPsi3nm42FD/oDYIZ2PQa4TNWWuWecxln6jlIQzpZTDMUeO1NicJP6lLn2TtRw=="
+  "resolved" "https://registry.npmjs.org/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-2.3.4.tgz"
+  "version" "2.3.4"
+
+"prettier@^2.0.2", "prettier@>= 1.13.0", "prettier@>=2.0", "prettier@2.6.2":
   "integrity" "sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew=="
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.6.2.tgz"
   "version" "2.6.2"
@@ -6920,7 +6925,7 @@
   dependencies:
     "is-typedarray" "^1.0.0"
 
-"typescript@^4.4.4", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta":
+"typescript@^4.4.4", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=2.9":
   "integrity" "sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.7.2.tgz"
   "version" "4.7.2"
