@@ -2,11 +2,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigator from "../navigators/application";
+import Theme from "../pattern-library/themes/default";
 
 function Application() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
+      <NavigationContainer theme={Theme}>
         <Navigator />
       </NavigationContainer>
     </SafeAreaProvider>
