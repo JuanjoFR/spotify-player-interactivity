@@ -1,17 +1,8 @@
 import * as React from "react";
-import { StyleSheet, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-const styles = StyleSheet.create({
-  safeArea: { flex: 1 }
-});
+import LibraryTemplate from "../pattern-library/templates/library";
 
 function Library() {
-  return (
-    <SafeAreaView edges={["right", "left"]} style={styles.safeArea}>
-      <Text>Library</Text>
-    </SafeAreaView>
-  );
+  return <LibraryTemplate />;
 }
 
 export default Library;
