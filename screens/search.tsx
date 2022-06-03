@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: "skyblue" }
 });
 
-function Home() {
+function Search() {
   return (
     <SafeAreaView
       edges={["top", "right", "bottom", "left"]}
       style={styles.safeArea}>
-      <Text>Home</Text>
+      <Text>Search</Text>
     </SafeAreaView>
   );
 }
 
-export default Home;
+export default Search;
