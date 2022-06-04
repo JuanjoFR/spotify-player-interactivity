@@ -1,10 +1,10 @@
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { Text, TextStyle } from "react-native";
-import { Theme } from "../themes/types";
+import { Theme } from "../types";
 
 interface ComponentProps {
-  style: TextStyle;
+  style?: TextStyle;
   children: string;
 }
 

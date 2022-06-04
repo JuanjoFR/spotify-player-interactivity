@@ -3,7 +3,7 @@ import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import Label from "../atoms/label";
-import { Theme } from "../themes/types";
+import { Theme } from "../types";
 
 const styles = StyleSheet.create({
   tabBarContainer: { flexDirection: "row" },
