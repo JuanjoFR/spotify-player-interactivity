@@ -1,13 +1,14 @@
+import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import MiniPreviewList from "../molecules/mini-preview-list";
-import SectionHeader from "../molecules/section-header";
-import { MostPlayed as IMostPlayed } from "../types";
+import SectionHeaderWithActions from "../molecules/section-header-with-actions";
+import { MostPlayed as IMostPlayed, Theme } from "../types";
 
 interface ComponentProps {
   headerText: string;
   data: IMostPlayed[];
-  containerStyle: ViewStyle;
+  containerStyle: StyleProp<ViewStyle>;
   listStyle: StyleProp<ViewStyle>;
   onNotificationsPress: () => void;
   onRecentlyPlayedPress: () => void;
@@ -23,9 +24,11 @@ function MostPlayed({
   onRecentlyPlayedPress,
   onSettingsPress
 }: ComponentProps) {
+  const { spacing } = useTheme() as Theme;
+
   return (
-    <View style={containerStyle}>
-      <SectionHeader
+    <View style={[{ marginBottom: spacing.m }, containerStyle]}>
+      <SectionHeaderWithActions
         text={headerText}
         onNotificationsPress={onNotificationsPress}
         onRecentlyPlayedPress={onRecentlyPlayedPress}

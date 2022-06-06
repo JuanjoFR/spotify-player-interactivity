@@ -3,9 +3,13 @@ import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import Title from "../atoms/title";
 import { Theme } from "../types";
+import SectionActions from "./section-actions";
 
 interface ComponentProps {
   text: string;
+  onNotificationsPress: () => void;
+  onRecentlyPlayedPress: () => void;
+  onSettingsPress: () => void;
 }
 
 const styles = StyleSheet.create({
@@ -17,7 +21,12 @@ const styles = StyleSheet.create({
   }
 });
 
-function SectionHeader({ text }: ComponentProps) {
+function SectionHeaderWithActions({
+  text,
+  onNotificationsPress,
+  onRecentlyPlayedPress,
+  onSettingsPress
+}: ComponentProps) {
   const { pressableSize, spacing } = useTheme() as Theme;
 
   return (
@@ -27,8 +36,15 @@ function SectionHeader({ text }: ComponentProps) {
         styles.container
       ]}>
       <Title>{text}</Title>
+      <SectionActions
+        config={[
+          { iconName: "notifications-outline", action: onNotificationsPress },
+          { iconName: "time-outline", action: onRecentlyPlayedPress },
+          { iconName: "settings-outline", action: onSettingsPress }
+        ]}
+      />
     </View>
   );
 }
 
-export default SectionHeader;
+export default SectionHeaderWithActions;

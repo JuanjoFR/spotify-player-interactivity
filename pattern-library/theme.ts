@@ -36,25 +36,35 @@ const theme: Theme = {
         fontSize: 11,
         fontWeight: "400"
       },
-      m: {
+      m1: {
         color: palette.white,
         fontSize: 12,
-        fontWeight: "700"
+        fontWeight: "700",
+        lineHeight: 20
+      },
+      m2: {
+        color: palette.gray1,
+        fontSize: 12,
+        fontWeight: "500",
+        lineHeight: 20
       }
     }
   },
   thumbnail: {
-    m: 56
+    s: 56,
+    m: 152
   },
   radius: {
-    s: 4
+    s: 4,
+    m: 10
   },
   iconSize: {
     m: 24
   },
   pressableSize: {
     m: 48
-  }
+  },
+  pressedOpacity: 0.7
 };
 
 export default theme;

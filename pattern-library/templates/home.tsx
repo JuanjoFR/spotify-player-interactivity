@@ -2,12 +2,18 @@ import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import MadeForYou from "../organisms/made-for-you";
 import MostPlayed from "../organisms/most-played";
-import { MostPlayed as IMostPlayed, Theme } from "../types";
+import {
+  MadeForYou as IMadeForYou,
+  MostPlayed as IMostPlayed,
+  Theme
+} from "../types";
 
 interface ComponentProps {
   data: {
     mostPlayed: IMostPlayed[];
+    madeForYou: IMadeForYou[];
   };
   onNotificationsPress: () => void;
   onRecentlyPlayedPress: () => void;
@@ -37,6 +43,13 @@ function Home({
           onNotificationsPress={onNotificationsPress}
           onRecentlyPlayedPress={onRecentlyPlayedPress}
           onSettingsPress={onSettingsPress}
+        />
+        <MadeForYou
+          headerText="Made for you"
+          data={data.madeForYou}
+          containerStyle={{
+            marginHorizontal: spacing.l
+          }}
         />
       </SafeAreaView>
     </ScrollView>

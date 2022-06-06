@@ -20,14 +20,12 @@ const styles = StyleSheet.create({
   pressableIcon: {
     alignItems: "center",
     justifyContent: "center"
-  },
-  iconPressed: {
-    opacity: 0.7
   }
 });
 
 function SectionActions({ config }: ComponentProps) {
-  const { colors, iconSize, pressableSize } = useTheme() as Theme;
+  const { colors, iconSize, pressableSize, pressedOpacity } =
+    useTheme() as Theme;
 
   return (
     <View style={styles.container}>
@@ -41,41 +39,11 @@ function SectionActions({ config }: ComponentProps) {
               name={item.iconName}
               color={colors.text}
               size={iconSize.m}
-              style={pressed ? styles.iconPressed : null}
+              style={pressed ? { opacity: pressedOpacity } : null}
             />
           )}
         </Pressable>
       ))}
-      {/* <Pressable style={styles.pressableIcon} onPress={onNotificationsPress}>
-        {({ pressed }) => (
-          <Ionicons
-            name="notifications-outline"
-            color={colors.text}
-            size={24}
-            style={pressed ? styles.iconPressed : null}
-          />
-        )}
-      </Pressable>
-      <Pressable style={styles.pressableIcon} onPress={onRecentlyPlayedPress}>
-        {({ pressed }) => (
-          <Ionicons
-            name="time-outline"
-            color={colors.text}
-            size={24}
-            style={pressed ? styles.iconPressed : null}
-          />
-        )}
-      </Pressable>
-      <Pressable style={styles.pressableIcon} onPress={onSettingsPress}>
-        {({ pressed }) => (
-          <Ionicons
-            name="settings-outline"
-            color={colors.text}
-            size={24}
-            style={pressed ? styles.iconPressed : null}
-          />
-        )}
-      </Pressable> */}
     </View>
   );
 }

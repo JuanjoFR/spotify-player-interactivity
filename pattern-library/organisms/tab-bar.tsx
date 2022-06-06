@@ -1,23 +1,24 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Label from "../atoms/label";
 import { Theme } from "../types";
 
 const styles = StyleSheet.create({
-  tabBarContainer: { flexDirection: "row" },
-  tabContainer: { flex: 1, alignItems: "center" }
+  tabBar: { flexDirection: "row" },
+  tabWrapper: { flex: 1 },
+  tab: { alignItems: "center" }
 });
 
 function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const { colors, iconSize } = useTheme() as Theme;
+  const { colors, iconSize, pressedOpacity } = useTheme() as Theme;
 
   return (
     <SafeAreaView
       edges={["bottom"]}
-      style={[{ backgroundColor: colors.background }, styles.tabBarContainer]}>
+      style={[{ backgroundColor: colors.background }, styles.tabBar]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label = options.title !== undefined ? options.title : route.name;
@@ -53,19 +54,27 @@ function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={styles.tabContainer}>
-            {options.tabBarIcon
-              ? options.tabBarIcon({
-                  focused: isFocused,
-                  color: isFocused ? colors.text : colors.textLight,
-                  size: iconSize.m
-                })
-              : undefined}
-            <Label
-              variant="s"
-              style={!isFocused ? { color: colors.textLight } : undefined}>
-              {label}
-            </Label>
+            style={styles.tabWrapper}>
+            {({ pressed }) => (
+              <View
+                style={[
+                  styles.tab,
+                  pressed ? { opacity: pressedOpacity } : null
+                ]}>
+                {options.tabBarIcon
+                  ? options.tabBarIcon({
+                      focused: isFocused,
+                      color: isFocused ? colors.text : colors.textLight,
+                      size: iconSize.m
+                    })
+                  : undefined}
+                <Label
+                  variant="s"
+                  style={!isFocused ? { color: colors.textLight } : undefined}>
+                  {label}
+                </Label>
+              </View>
+            )}
           </Pressable>
         );
       })}

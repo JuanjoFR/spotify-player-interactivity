@@ -22,7 +22,8 @@ interface Spacing {
 
 interface Label {
   s: TextStyle;
-  m: TextStyle;
+  m1: TextStyle;
+  m2: TextStyle;
 }
 
 interface Text {
@@ -31,11 +32,13 @@ interface Text {
 }
 
 interface Thumbnail {
+  s: number;
   m: number;
 }
 
 interface Radius {
   s: number;
+  m: number;
 }
 
 interface IconSize {
@@ -55,10 +58,16 @@ export interface Theme extends RNNTheme {
   radius: Radius;
   iconSize: IconSize;
   pressableSize: PressableSize;
+  pressedOpacity: number;
 }
 
 // data
 export interface MostPlayed {
+  id: string;
+  name: string;
+  image: ImageSourcePropType;
+}
+export interface MadeForYou {
   id: string;
   name: string;
   image: ImageSourcePropType;
