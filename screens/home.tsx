@@ -2,21 +2,16 @@ import * as React from "react";
 import { ImageSourcePropType } from "react-native";
 import HomeTemplate from "../pattern-library/templates/home";
 
-interface MostPlayed {
-  id: string;
-  name: string;
-  image: ImageSourcePropType;
-}
-
-interface MadeForYou {
+interface Preview {
   id: string;
   name: string;
   image: ImageSourcePropType;
 }
 
 interface Data {
-  mostPlayed: MostPlayed[];
-  madeForYou: MadeForYou[];
+  mostPlayed: Preview[];
+  madeForYou: Preview[];
+  recentlyPlayed: Preview[];
 }
 
 const data: Data = {
@@ -82,6 +77,53 @@ const data: Data = {
       id: "6",
       name: "Pet Shop Boys, Deee-Lite, Mr. Vegas, Madonna, Sade, Debbie Pender, Trammps, Ellie Goulding",
       image: require("../assets/images/spotify-playlist-cover-smokey-blue-guitar-032322.jpg")
+    }
+  ],
+  recentlyPlayed: [
+    {
+      id: "1",
+      name: "Born to Die",
+      image: require("../assets/images/R-3400121-1620336413-9316.jpeg")
+    },
+    {
+      id: "2",
+      name: "Demon Days",
+      image: require("../assets/images/R-844904-1164712778.jpeg")
+    },
+    {
+      id: "3",
+      name: "Maxinquaye",
+      image: require("../assets/images/R-55161-1366037219-3361.jpeg")
+    },
+    {
+      id: "4",
+      name: "Psyence Fiction",
+      image: require("../assets/images/R-309316-1556853077-6974.jpeg")
+    },
+    {
+      id: "5",
+      name: "1. Outside (The Nathan Adler Diaries: A Hyper Cycle)",
+      image: require("../assets/images/R-256507-1188750879.jpeg")
+    },
+    {
+      id: "6",
+      name: "If You Wait",
+      image: require("../assets/images/R-4899488-1579199404-7648.jpeg")
+    },
+    {
+      id: "7",
+      name: "Telegram",
+      image: require("../assets/images/R-3650-1469133260-1175.jpeg")
+    },
+    {
+      id: "8",
+      name: "The Last Resort",
+      image: require("../assets/images/R-830189-1265162680.jpeg")
+    },
+    {
+      id: "9",
+      name: "Endtroducing.....",
+      image: require("../assets/images/R-5058-1549778735-1171.jpeg")
     }
   ]
 };

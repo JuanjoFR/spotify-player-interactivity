@@ -2,10 +2,10 @@ import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import Label from "../atoms/label";
-import { MostPlayed, Theme } from "../types";
+import { Preview, Theme } from "../types";
 
 interface ComponentProps {
-  data: MostPlayed;
+  data: Preview;
 }
 
 const styles = StyleSheet.create({

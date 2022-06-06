@@ -47,12 +47,19 @@ const theme: Theme = {
         fontSize: 12,
         fontWeight: "500",
         lineHeight: 20
+      },
+      m3: {
+        color: palette.white,
+        fontSize: 12,
+        fontWeight: "500",
+        lineHeight: 20
       }
     }
   },
   thumbnail: {
     s: 56,
-    m: 152
+    m: 115,
+    l: 152
   },
   radius: {
     s: 4,

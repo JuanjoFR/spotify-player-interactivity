@@ -3,11 +3,11 @@ import * as React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import MiniPreviewList from "../molecules/mini-preview-list";
 import SectionHeaderWithActions from "../molecules/section-header-with-actions";
-import { MostPlayed as IMostPlayed, Theme } from "../types";
+import { Preview, Theme } from "../types";
 
 interface ComponentProps {
   headerText: string;
-  data: IMostPlayed[];
+  data: Preview[];
   containerStyle: StyleProp<ViewStyle>;
   listStyle: StyleProp<ViewStyle>;
   onNotificationsPress: () => void;
@@ -15,7 +15,7 @@ interface ComponentProps {
   onSettingsPress: () => void;
 }
 
-function MostPlayed({
+function MiniPreview({
   headerText,
   data,
   containerStyle,
@@ -39,4 +39,4 @@ function MostPlayed({
   );
 }
 
-export default MostPlayed;
+export default MiniPreview;

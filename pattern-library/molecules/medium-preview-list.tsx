@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
   }
 });
 
-function LargePreviewList({ data }: ComponentProps) {
-  const { spacing, thumbnail, radius, pressedOpacity } = useTheme() as Theme;
+function MediumPreviewList({ data }: ComponentProps) {
+  const { spacing, thumbnail, pressedOpacity } = useTheme() as Theme;
 
   return (
     <ScrollView
@@ -30,31 +30,24 @@ function LargePreviewList({ data }: ComponentProps) {
       {data.map((item, index) => (
         <Pressable
           key={item.id}
-          style={[
-            {
-              borderRadius: radius.m
-            },
-            index < data.length - 1 ? { marginRight: spacing.l } : null
-          ]}>
+          style={[index < data.length - 1 ? { marginRight: spacing.l } : null]}>
           {({ pressed }) => (
             <View
               style={[
                 {
-                  width: thumbnail.l,
-                  borderRadius: radius.m
+                  width: thumbnail.m
                 },
                 pressed ? { opacity: pressedOpacity } : null
               ]}>
               <Image
                 source={item.image}
                 style={{
-                  width: thumbnail.l,
-                  height: thumbnail.l,
-                  borderRadius: radius.m,
+                  width: thumbnail.m,
+                  height: thumbnail.m,
                   marginBottom: spacing.m
                 }}
               />
-              <Label variant="m2" numberOfLines={2}>
+              <Label variant="m3" numberOfLines={2}>
                 {item.name}
               </Label>
             </View>
@@ -65,4 +58,4 @@ function LargePreviewList({ data }: ComponentProps) {
   );
 }
 
-export default LargePreviewList;
+export default MediumPreviewList;

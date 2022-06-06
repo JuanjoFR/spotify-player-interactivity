@@ -24,6 +24,7 @@ interface Label {
   s: TextStyle;
   m1: TextStyle;
   m2: TextStyle;
+  m3: TextStyle;
 }
 
 interface Text {
@@ -34,6 +35,7 @@ interface Text {
 interface Thumbnail {
   s: number;
   m: number;
+  l: number;
 }
 
 interface Radius {
@@ -62,12 +64,7 @@ export interface Theme extends RNNTheme {
 }
 
 // data
-export interface MostPlayed {
-  id: string;
-  name: string;
-  image: ImageSourcePropType;
-}
-export interface MadeForYou {
+export interface Preview {
   id: string;
   name: string;
   image: ImageSourcePropType;

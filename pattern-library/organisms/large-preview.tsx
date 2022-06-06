@@ -2,15 +2,15 @@ import * as React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import LargePreviewList from "../molecules/large-preview-list";
 import SectionHeader from "../molecules/section-header";
-import { MadeForYou as IMadeForYou } from "../types";
+import { Preview } from "../types";
 
 interface ComponentProps {
   headerText: string;
-  data: IMadeForYou[];
+  data: Preview[];
   containerStyle: StyleProp<ViewStyle>;
 }
 
-function MostPlayed({ headerText, data, containerStyle }: ComponentProps) {
+function LargePreview({ headerText, data, containerStyle }: ComponentProps) {
   return (
     <View style={containerStyle}>
       <SectionHeader text={headerText} />
@@ -19,4 +19,4 @@ function MostPlayed({ headerText, data, containerStyle }: ComponentProps) {
   );
 }
 
-export default MostPlayed;
+export default LargePreview;

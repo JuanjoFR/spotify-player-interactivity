@@ -13,12 +13,15 @@ const styles = StyleSheet.create({
 });
 
 function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const { colors, iconSize, pressedOpacity } = useTheme() as Theme;
+  const { colors, iconSize, pressedOpacity, spacing } = useTheme() as Theme;
 
   return (
     <SafeAreaView
       edges={["bottom"]}
-      style={[{ backgroundColor: colors.background }, styles.tabBar]}>
+      style={[
+        { backgroundColor: colors.background, paddingVertical: spacing.s },
+        styles.tabBar
+      ]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label = options.title !== undefined ? options.title : route.name;
