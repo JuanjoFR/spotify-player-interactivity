@@ -1,7 +1,8 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Label from "../atoms/label";
 import { Theme } from "../types";
 
@@ -11,10 +12,11 @@ const styles = StyleSheet.create({
 });
 
 function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const { colors } = useTheme() as Theme;
+  const { colors, iconSize } = useTheme() as Theme;
 
   return (
-    <View
+    <SafeAreaView
+      edges={["bottom"]}
       style={[{ backgroundColor: colors.background }, styles.tabBarContainer]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -55,17 +57,19 @@ function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             {options.tabBarIcon
               ? options.tabBarIcon({
                   focused: isFocused,
-                  color: isFocused ? colors.primary : colors.text,
-                  size: 24
+                  color: isFocused ? colors.text : colors.textLight,
+                  size: iconSize.m
                 })
               : undefined}
-            <Label style={{ color: isFocused ? colors.primary : colors.text }}>
+            <Label
+              variant="s"
+              style={!isFocused ? { color: colors.textLight } : undefined}>
               {label}
             </Label>
           </Pressable>
         );
       })}
-    </View>
+    </SafeAreaView>
   );
 }
 

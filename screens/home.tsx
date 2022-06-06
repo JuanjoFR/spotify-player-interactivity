@@ -1,9 +1,11 @@
 import * as React from "react";
+import { ImageSourcePropType } from "react-native";
 import HomeTemplate from "../pattern-library/templates/home";
 
 interface MostPlayed {
   id: string;
   name: string;
+  image: ImageSourcePropType;
 }
 
 interface Data {
@@ -12,12 +14,36 @@ interface Data {
 
 const data: Data = {
   mostPlayed: [
-    { id: "1", name: "Fake name 1" },
-    { id: "2", name: "Fake name 2" },
-    { id: "3", name: "Fake name 3" },
-    { id: "4", name: "Fake name 4" },
-    { id: "5", name: "Fake name 5" },
-    { id: "6", name: "Fake name 6" }
+    {
+      id: "1",
+      name: "Seeking Thrills",
+      image: require("../assets/images/R-14636565-1578771054-6447.jpg")
+    },
+    {
+      id: "2",
+      name: "Humanz",
+      image: require("../assets/images/R-10175557-1496076820-7035.jpg")
+    },
+    {
+      id: "3",
+      name: "Third",
+      image: require("../assets/images/R-1319919-1215840361.jpg")
+    },
+    {
+      id: "4",
+      name: "Music Sounds Better With You",
+      image: require("../assets/images/R-4087-1228853783.jpg")
+    },
+    {
+      id: "5",
+      name: "Exit Planet Dust",
+      image: require("../assets/images/R-9130-1520448923-1912.jpg")
+    },
+    {
+      id: "6",
+      name: "Vulnicura",
+      image: require("../assets/images/R-6793557-1430654646-5820.jpg")
+    }
   ]
 };
 

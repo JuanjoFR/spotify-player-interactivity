@@ -29,10 +29,11 @@ function Home({
         <MostPlayed
           headerText="Good morning"
           data={data.mostPlayed}
-          style={{
-            marginLeft: spacing.m,
+          containerStyle={{
+            marginLeft: spacing.l,
             marginTop: spacing.xl
           }}
+          listStyle={{ marginRight: spacing.l }}
           onNotificationsPress={onNotificationsPress}
           onRecentlyPlayedPress={onRecentlyPlayedPress}
           onSettingsPress={onSettingsPress}

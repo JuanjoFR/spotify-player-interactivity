@@ -1,17 +1,22 @@
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { Text, TextStyle } from "react-native";
+import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 import { Theme } from "../types";
 
-interface ComponentProps {
-  style?: TextStyle;
+interface ComponentProps extends TextProps {
+  variant: "s" | "m";
+  style?: StyleProp<TextStyle>;
   children: string;
 }
 
-function Label({ style, children }: ComponentProps) {
-  const { colors } = useTheme() as Theme;
+function Label({ variant, style, children, ...rest }: ComponentProps) {
+  const { text } = useTheme() as Theme;
 
-  return <Text style={[{ color: colors.text }, style]}>{children}</Text>;
+  return (
+    <Text {...rest} style={[text.label[variant], style]}>
+      {children}
+    </Text>
+  );
 }
 
 export default Label;

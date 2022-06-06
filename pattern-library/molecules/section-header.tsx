@@ -1,9 +1,9 @@
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { StyleSheet, View } from "react-native";
 import Title from "../atoms/title";
 import { Theme } from "../types";
+import SectionActions from "./section-actions";
 
 interface ComponentProps {
   text: string;
@@ -18,18 +18,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between"
-  },
-  icons: {
-    flexDirection: "row"
-  },
-  pressableIcon: {
-    width: 48,
-    height: 48,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  iconPressed: {
-    opacity: 0.7
   }
 });
 
@@ -39,43 +27,22 @@ function SectionHeader({
   onRecentlyPlayedPress,
   onSettingsPress
 }: ComponentProps) {
-  const { colors, spacing } = useTheme() as Theme;
+  const { pressableSize, spacing } = useTheme() as Theme;
 
   return (
-    <View style={[styles.container, { marginBottom: spacing.m }]}>
+    <View
+      style={[
+        { height: pressableSize.m, marginBottom: spacing.m },
+        styles.container
+      ]}>
       <Title>{text}</Title>
-      <View style={styles.icons}>
-        <Pressable style={styles.pressableIcon} onPress={onNotificationsPress}>
-          {({ pressed }) => (
-            <Ionicons
-              name="notifications-outline"
-              color={colors.text}
-              size={24}
-              style={pressed ? styles.iconPressed : null}
-            />
-          )}
-        </Pressable>
-        <Pressable style={styles.pressableIcon} onPress={onRecentlyPlayedPress}>
-          {({ pressed }) => (
-            <Ionicons
-              name="time-outline"
-              color={colors.text}
-              size={24}
-              style={pressed ? styles.iconPressed : null}
-            />
-          )}
-        </Pressable>
-        <Pressable style={styles.pressableIcon} onPress={onSettingsPress}>
-          {({ pressed }) => (
-            <Ionicons
-              name="settings-outline"
-              color={colors.text}
-              size={24}
-              style={pressed ? styles.iconPressed : null}
-            />
-          )}
-        </Pressable>
-      </View>
+      <SectionActions
+        config={[
+          { iconName: "notifications-outline", action: onNotificationsPress },
+          { iconName: "time-outline", action: onRecentlyPlayedPress },
+          { iconName: "settings-outline", action: onSettingsPress }
+        ]}
+      />
     </View>
   );
 }
