@@ -6,6 +6,7 @@ import { Preview, Theme } from "../types";
 
 interface ComponentProps {
   data: Preview[];
+  onItemPress: (item: Preview) => void;
 }
 
 const styles = StyleSheet.create({
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function MediumPreviewList({ data }: ComponentProps) {
+function MediumPreviewList({ data, onItemPress }: ComponentProps) {
   const { spacing, thumbnail, pressedOpacity } = useTheme() as Theme;
 
   return (
@@ -30,6 +31,7 @@ function MediumPreviewList({ data }: ComponentProps) {
       {data.map((item, index) => (
         <Pressable
           key={item.id}
+          onPress={() => onItemPress(item)}
           style={[index < data.length - 1 ? { marginRight: spacing.l } : null]}>
           {({ pressed }) => (
             <View

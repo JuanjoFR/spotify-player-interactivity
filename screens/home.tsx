@@ -12,6 +12,7 @@ interface Data {
   mostPlayed: Preview[];
   madeForYou: Preview[];
   recentlyPlayed: Preview[];
+  yourTopMixes: Preview[];
 }
 
 const data: Data = {
@@ -125,6 +126,53 @@ const data: Data = {
       name: "Endtroducing.....",
       image: require("../assets/images/R-5058-1549778735-1171.jpeg")
     }
+  ],
+  yourTopMixes: [
+    {
+      id: "1",
+      name: "The White Stripes, PJ Harvey, Amy Winehouse, Psykick Lyrikah, Benjamin Biolay, Tunng",
+      image: require("../assets/images/Photo-from-Pixabay.jpg")
+    },
+    {
+      id: "2",
+      name: "First Aid Kit, Leonard Cohen, Lucinda Williams, The Hollies, Bruce Springsteen",
+      image: require("../assets/images/106f1c0d-787d-4832-b145-ed1875321a9f_rw_1920.jpg")
+    },
+    {
+      id: "3",
+      name: "Suede, James, Cornershop, Blur, Manic Street Preachers, Echobelly, Saint Etienne",
+      image: require("../assets/images/spotify-playlist-cover-abstract-piano-art-032322.jpg")
+    },
+    {
+      id: "4",
+      name: "Audiobooks, Doves, TOY (18), Confidence Man, LCMDF, Espiritu, Unloved (4)",
+      image: require("../assets/images/cd4fedf8-4cfe-4942-af83-6776df32ba79_rw_1920.jpg")
+    },
+    {
+      id: "5",
+      name: "Bat For Lashes, John Legend, Arsenal, The Kooks, Empire Of The Sun, Katy Perry",
+      image: require("../assets/images/spotify-playlist-cover-power-lines-music-notes-032322.jpg")
+    },
+    {
+      id: "6",
+      name: "Amhad Jamal, Tinariwen, Bon Iver, Sampa The Great, Jahneration, Emel Mathlouthi",
+      image: require("../assets/images/6693757a-c0a4-461e-b200-8155d130761f_rw_1920.jpg")
+    },
+    {
+      id: "7",
+      name: "James Blunt, The 1975, Barry White, Morcheeba, Cherry Ghost, All Saints",
+      image: require("../assets/images/Photo-by-davisuko-on-Unsplash-.jpg")
+    },
+    {
+      id: "8",
+      name: "The Prodigy, Underworld, Fatboy Slim, Deee-Lite, Opus III, Corona, Sonique",
+      image: require("../assets/images/spotify-playlist-cover-bright-yellow-airpods-032322.jpg")
+    },
+    {
+      id: "9",
+      name: "I:Cube, Barbara Tucker, Cassius, Superfunk, Soha, Bob Sinclar, Joe Smooth",
+      image: require("../assets/images/dce81cbb-e184-4b2e-addc-b43bd9f59247_rw_1920.jpg")
+    }
   ]
 };
 
@@ -141,12 +189,17 @@ function Home() {
     console.log("handle settings press");
   }
 
+  function handleItemPress(item: Preview) {
+    console.log("handle item press", item);
+  }
+
   return (
     <HomeTemplate
       data={data}
       onNotificationsPress={handleNotificationsPress}
       onRecentlyPlayedPress={handleRecentlyPlayedPress}
       onSettingsPress={handleSettingsPress}
+      onItemPress={handleItemPress}
     />
   );
 }

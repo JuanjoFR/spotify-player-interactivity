@@ -2,11 +2,12 @@ import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import MiniPreviewItem from "../molecules/mini-preview-item";
-import { MostPlayed, Theme } from "../types";
+import { Preview, Theme } from "../types";
 
 interface ComponentProps {
-  data: MostPlayed[];
+  data: Preview[];
   style: StyleProp<ViewStyle>;
+  onItemPress: (item: Preview) => void;
 }
 
 const styles = StyleSheet.create({
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function MiniPreviewList({ data, style }: ComponentProps) {
+function MiniPreviewList({ data, style, onItemPress }: ComponentProps) {
   const { spacing } = useTheme() as Theme;
 
   return (
@@ -34,7 +35,7 @@ function MiniPreviewList({ data, style }: ComponentProps) {
             !(index % 2) ? { paddingRight: spacing.m / 2 } : null,
             { marginBottom: spacing.m }
           ]}>
-          <MiniPreviewItem key={item.id} data={item} />
+          <MiniPreviewItem key={item.id} data={item} onPress={onItemPress} />
         </View>
       ))}
     </View>

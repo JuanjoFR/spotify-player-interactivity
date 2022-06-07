@@ -12,17 +12,20 @@ interface ComponentProps {
     mostPlayed: Preview[];
     madeForYou: Preview[];
     recentlyPlayed: Preview[];
+    yourTopMixes: Preview[];
   };
   onNotificationsPress: () => void;
   onRecentlyPlayedPress: () => void;
   onSettingsPress: () => void;
+  onItemPress: (item: Preview) => void;
 }
 
 function Home({
   data,
   onNotificationsPress,
   onRecentlyPlayedPress,
-  onSettingsPress
+  onSettingsPress,
+  onItemPress
 }: ComponentProps) {
   const { spacing } = useTheme() as Theme;
 
@@ -42,6 +45,7 @@ function Home({
           onNotificationsPress={onNotificationsPress}
           onRecentlyPlayedPress={onRecentlyPlayedPress}
           onSettingsPress={onSettingsPress}
+          onItemPress={onItemPress}
         />
         <LargePreview
           headerText="Made for you"
@@ -50,6 +54,7 @@ function Home({
             marginHorizontal: spacing.l,
             marginBottom: spacing.l
           }}
+          onItemPress={onItemPress}
         />
         <MediumPreview
           headerText="Recently Played"
@@ -58,6 +63,16 @@ function Home({
             marginHorizontal: spacing.l,
             marginBottom: spacing.l
           }}
+          onItemPress={onItemPress}
+        />
+        <LargePreview
+          headerText="Your top mixes"
+          data={data.yourTopMixes}
+          containerStyle={{
+            marginHorizontal: spacing.l,
+            marginBottom: spacing.l
+          }}
+          onItemPress={onItemPress}
         />
       </SafeAreaView>
     </ScrollView>

@@ -6,6 +6,7 @@ import { Preview, Theme } from "../types";
 
 interface ComponentProps {
   data: Preview;
+  onPress: (item: Preview) => void;
 }
 
 const styles = StyleSheet.create({
@@ -17,19 +18,20 @@ const styles = StyleSheet.create({
   label: { flexShrink: 1 }
 });
 
-function MiniPreviewItem({ data }: ComponentProps) {
+function MiniPreviewItem({ data, onPress }: ComponentProps) {
   const { spacing, thumbnail, radius, colors, pressedOpacity } =
     useTheme() as Theme;
 
   return (
     <Pressable
+      onPress={() => onPress(data)}
       style={{
         borderRadius: radius.s
       }}>
       {({ pressed }) => (
         <View
           style={[
-            { backgroundColor: colors.backgroundLight },
+            { backgroundColor: colors.backgroundLight, borderRadius: radius.s },
             styles.container,
             pressed ? { opacity: pressedOpacity } : null
           ]}>

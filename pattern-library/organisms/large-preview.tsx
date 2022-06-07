@@ -8,13 +8,19 @@ interface ComponentProps {
   headerText: string;
   data: Preview[];
   containerStyle: StyleProp<ViewStyle>;
+  onItemPress: (item: Preview) => void;
 }
 
-function LargePreview({ headerText, data, containerStyle }: ComponentProps) {
+function LargePreview({
+  headerText,
+  data,
+  containerStyle,
+  onItemPress
+}: ComponentProps) {
   return (
     <View style={containerStyle}>
       <SectionHeader text={headerText} />
-      <LargePreviewList data={data} />
+      <LargePreviewList data={data} onItemPress={onItemPress} />
     </View>
   );
 }

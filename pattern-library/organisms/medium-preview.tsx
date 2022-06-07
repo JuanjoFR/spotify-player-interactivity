@@ -8,13 +8,19 @@ interface ComponentProps {
   headerText: string;
   data: Preview[];
   containerStyle: StyleProp<ViewStyle>;
+  onItemPress: (item: Preview) => void;
 }
 
-function MediumPreview({ headerText, data, containerStyle }: ComponentProps) {
+function MediumPreview({
+  headerText,
+  data,
+  containerStyle,
+  onItemPress
+}: ComponentProps) {
   return (
     <View style={[containerStyle]}>
       <SectionHeader text={headerText} />
-      <MediumPreviewList data={data} />
+      <MediumPreviewList data={data} onItemPress={onItemPress} />
     </View>
   );
 }

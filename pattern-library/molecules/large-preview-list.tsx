@@ -6,6 +6,7 @@ import { Preview, Theme } from "../types";
 
 interface ComponentProps {
   data: Preview[];
+  onItemPress: (item: Preview) => void;
 }
 
 const styles = StyleSheet.create({
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function LargePreviewList({ data }: ComponentProps) {
+function LargePreviewList({ data, onItemPress }: ComponentProps) {
   const { spacing, thumbnail, radius, pressedOpacity } = useTheme() as Theme;
 
   return (
@@ -30,6 +31,7 @@ function LargePreviewList({ data }: ComponentProps) {
       {data.map((item, index) => (
         <Pressable
           key={item.id}
+          onPress={() => onItemPress(item)}
           style={[
             {
               borderRadius: radius.m

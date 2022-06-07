@@ -13,6 +13,7 @@ interface ComponentProps {
   onNotificationsPress: () => void;
   onRecentlyPlayedPress: () => void;
   onSettingsPress: () => void;
+  onItemPress: (item: Preview) => void;
 }
 
 function MiniPreview({
@@ -22,7 +23,8 @@ function MiniPreview({
   listStyle,
   onNotificationsPress,
   onRecentlyPlayedPress,
-  onSettingsPress
+  onSettingsPress,
+  onItemPress
 }: ComponentProps) {
   const { spacing } = useTheme() as Theme;
 
@@ -34,7 +36,11 @@ function MiniPreview({
         onRecentlyPlayedPress={onRecentlyPlayedPress}
         onSettingsPress={onSettingsPress}
       />
-      <MiniPreviewList data={data} style={listStyle} />
+      <MiniPreviewList
+        data={data}
+        style={listStyle}
+        onItemPress={onItemPress}
+      />
     </View>
   );
 }
