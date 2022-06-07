@@ -3,8 +3,9 @@ import { Theme } from "./types";
 const palette = {
   white: "#FFFFFF",
   gray1: "#B3B3B3",
-  gray2: "#312A2C",
-  gray3: "#0E151E"
+  gray2: "#3E434B",
+  gray3: "#312A2C",
+  gray4: "#0E151E"
 };
 
 const theme: Theme = {
@@ -17,14 +18,15 @@ const theme: Theme = {
   },
   colors: {
     background: "#121212",
-    backgroundLight: palette.gray2,
-    miniPlayerBackground: palette.gray3,
+    backgroundLight: palette.gray3,
+    miniPlayerBackground: palette.gray4,
     border: "rgb(39, 39, 41)",
     card: "rgb(18, 18, 18)",
     notification: "rgb(255, 69, 58)",
     primary: "rgb(10, 132, 255)",
     text: palette.white,
-    textLight: palette.gray1
+    textLight: palette.gray1,
+    progressBackground: palette.gray2
   },
   text: {
     title: {
@@ -76,7 +78,9 @@ const theme: Theme = {
   pressableSize: {
     m: 48
   },
-  pressedOpacity: 0.7
+  pressedOpacity: 0.7,
+  tabbarHeight: 52,
+  miniPlayerHeight: 56
 };
 
 export default theme;

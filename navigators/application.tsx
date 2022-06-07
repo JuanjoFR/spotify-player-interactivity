@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
+import { ImageSourcePropType } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TabBar from "../pattern-library/organisms/tab-bar";
 import { Theme } from "../pattern-library/types";
@@ -17,11 +18,13 @@ type NavigatorParamList = {
 interface Data {
   artist: string;
   song: string;
+  image: ImageSourcePropType;
 }
 
 const data: Data = {
   artist: "Sharon Van Etten",
-  song: "Mistakes"
+  song: "Mistakes",
+  image: require("../assets/images/Photo-from-Pixabay.jpg")
 };
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 

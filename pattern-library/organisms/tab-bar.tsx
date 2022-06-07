@@ -1,8 +1,8 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Dimensions, Pressable, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Label from "../atoms/label";
 import { MiniPlayer as IMiniPlayer, Theme } from "../types";
 import MiniPlayer from "./mini-player";
@@ -15,7 +15,6 @@ interface ComponentProps extends BottomTabBarProps {
 
 const styles = StyleSheet.create({
   playersContainer: {
-    // backgroundColor: "tomato",
     position: "absolute",
     top: 0,
     bottom: 0,
@@ -27,13 +26,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+    justifyContent: "center",
     transform: [{ translateY: 0 }]
   },
   tabBar: { flexDirection: "row" },
   tabWrapper: { flex: 1 },
   tab: { alignItems: "center" }
 });
-const SNAP_BOTTOM = 561;
+const { height } = Dimensions.get("window");
 
 function TabBar({
   state,
@@ -43,7 +43,10 @@ function TabBar({
   onMiniPlayerDevicePress,
   onMiniPlayerPlayPress
 }: ComponentProps) {
-  const { colors, iconSize, pressedOpacity, spacing } = useTheme() as Theme;
+  const { colors, iconSize, pressedOpacity, tabbarHeight, miniPlayerHeight } =
+    useTheme() as Theme;
+  const insets = useSafeAreaInsets();
+  const SNAP_BOTTOM = height - tabbarHeight - miniPlayerHeight - insets.bottom;
 
   return (
     <React.Fragment>
@@ -64,11 +67,11 @@ function TabBar({
         style={[
           styles.tabBarContainer,
           {
-            backgroundColor: colors.background,
-            paddingVertical: spacing.s
+            height: tabbarHeight + insets.bottom,
+            backgroundColor: colors.background
           }
         ]}>
-        <SafeAreaView edges={["bottom"]} style={styles.tabBar}>
+        <View style={[styles.tabBar, { marginBottom: insets.bottom }]}>
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const label =
@@ -84,7 +87,6 @@ function TabBar({
               });
 
               if (!isFocused && !event.defaultPrevented) {
-                // The `merge: true` option makes sure that the params inside the tab screen are preserved
                 navigation.navigate(route.name, { merge: true });
               }
             };
@@ -131,7 +133,7 @@ function TabBar({
               </Pressable>
             );
           })}
-        </SafeAreaView>
+        </View>
       </View>
     </React.Fragment>
   );

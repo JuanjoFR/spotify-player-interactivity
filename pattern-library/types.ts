@@ -12,6 +12,7 @@ interface Colors {
   textLight: string;
   border: string;
   notification: string;
+  progressBackground: string;
 }
 
 interface Spacing {
@@ -65,6 +66,8 @@ export interface Theme extends RNNTheme {
   iconSize: IconSize;
   pressableSize: PressableSize;
   pressedOpacity: number;
+  tabbarHeight: number;
+  miniPlayerHeight: number;
 }
 
 // data
@@ -77,4 +80,5 @@ export interface Preview {
 export interface MiniPlayer {
   artist: string;
   song: string;
+  image: ImageSourcePropType;
 }
