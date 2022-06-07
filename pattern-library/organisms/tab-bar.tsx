@@ -1,7 +1,13 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { Dimensions, Pressable, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Label from "../atoms/label";
 import { MiniPlayer as IMiniPlayer, Theme } from "../types";
@@ -13,6 +19,7 @@ interface ComponentProps extends BottomTabBarProps {
   onMiniPlayerPlayPress: () => void;
 }
 
+const STATUS_BAR_HEIGHT = Platform.OS === "android" ? 24 : 0;
 const styles = StyleSheet.create({
   playersContainer: {
     position: "absolute",
@@ -46,7 +53,12 @@ function TabBar({
   const { colors, iconSize, pressedOpacity, tabbarHeight, miniPlayerHeight } =
     useTheme() as Theme;
   const insets = useSafeAreaInsets();
-  const SNAP_BOTTOM = height - tabbarHeight - miniPlayerHeight - insets.bottom;
+  const SNAP_BOTTOM =
+    height -
+    tabbarHeight -
+    miniPlayerHeight -
+    insets.bottom -
+    STATUS_BAR_HEIGHT;
 
   return (
     <React.Fragment>

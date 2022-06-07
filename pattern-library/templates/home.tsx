@@ -27,7 +27,8 @@ function Home({
   onSettingsPress,
   onItemPress
 }: ComponentProps) {
-  const { spacing, tabbarHeight, miniPlayerHeight } = useTheme() as Theme;
+  const { spacing, tabbarHeight, miniPlayerHeight, colors } =
+    useTheme() as Theme;
   const scrollSectionHeaderStyle = { marginHorizontal: spacing.l };
   const scrollSectionContainerStyle = { marginBottom: spacing.l };
   const scrollSectionListContentContainerStyle = {
@@ -41,13 +42,13 @@ function Home({
       contentContainerStyle={{
         paddingBottom: tabbarHeight + miniPlayerHeight + insets.bottom
       }}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.background} />
       <View
         style={{
           marginTop: insets.top,
           marginLeft: insets.left,
           marginRight: insets.right
         }}>
-        <StatusBar barStyle="light-content" />
         <MiniPreview
           headerText="Good morning"
           data={data.mostPlayed}
