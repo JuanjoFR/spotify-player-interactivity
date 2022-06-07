@@ -28,6 +28,11 @@ function Home({
   onItemPress
 }: ComponentProps) {
   const { spacing } = useTheme() as Theme;
+  const scrollSectionHeaderStyle = { marginHorizontal: spacing.l };
+  const scrollSectionContainerStyle = { marginBottom: spacing.l };
+  const scrollSectionListContentContainerStyle = {
+    paddingHorizontal: spacing.l
+  };
 
   return (
     <ScrollView>
@@ -50,28 +55,25 @@ function Home({
         <LargePreview
           headerText="Made for you"
           data={data.madeForYou}
-          containerStyle={{
-            marginHorizontal: spacing.l,
-            marginBottom: spacing.l
-          }}
+          headerStyle={scrollSectionHeaderStyle}
+          containerStyle={scrollSectionContainerStyle}
+          listContentContainerStyle={scrollSectionListContentContainerStyle}
           onItemPress={onItemPress}
         />
         <MediumPreview
           headerText="Recently Played"
           data={data.recentlyPlayed}
-          containerStyle={{
-            marginHorizontal: spacing.l,
-            marginBottom: spacing.l
-          }}
+          headerStyle={scrollSectionHeaderStyle}
+          containerStyle={scrollSectionContainerStyle}
+          listContentContainerStyle={scrollSectionListContentContainerStyle}
           onItemPress={onItemPress}
         />
         <LargePreview
           headerText="Your top mixes"
           data={data.yourTopMixes}
-          containerStyle={{
-            marginHorizontal: spacing.l,
-            marginBottom: spacing.l
-          }}
+          headerStyle={scrollSectionHeaderStyle}
+          containerStyle={scrollSectionContainerStyle}
+          listContentContainerStyle={scrollSectionListContentContainerStyle}
           onItemPress={onItemPress}
         />
       </SafeAreaView>

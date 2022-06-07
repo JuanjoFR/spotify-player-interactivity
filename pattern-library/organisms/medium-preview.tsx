@@ -7,20 +7,28 @@ import { Preview } from "../types";
 interface ComponentProps {
   headerText: string;
   data: Preview[];
+  headerStyle: StyleProp<ViewStyle>;
   containerStyle: StyleProp<ViewStyle>;
+  listContentContainerStyle: StyleProp<ViewStyle>;
   onItemPress: (item: Preview) => void;
 }
 
 function MediumPreview({
   headerText,
   data,
+  headerStyle,
   containerStyle,
+  listContentContainerStyle,
   onItemPress
 }: ComponentProps) {
   return (
     <View style={[containerStyle]}>
-      <SectionHeader text={headerText} />
-      <MediumPreviewList data={data} onItemPress={onItemPress} />
+      <SectionHeader text={headerText} style={headerStyle} />
+      <MediumPreviewList
+        data={data}
+        contentContainerStyle={listContentContainerStyle}
+        onItemPress={onItemPress}
+      />
     </View>
   );
 }

@@ -1,11 +1,12 @@
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import Title from "../atoms/title";
 import { Theme } from "../types";
 
 interface ComponentProps {
   text: string;
+  style: StyleProp<ViewStyle>;
 }
 
 const styles = StyleSheet.create({
@@ -17,12 +18,13 @@ const styles = StyleSheet.create({
   }
 });
 
-function SectionHeader({ text }: ComponentProps) {
+function SectionHeader({ text, style }: ComponentProps) {
   const { pressableSize, spacing } = useTheme() as Theme;
 
   return (
     <View
       style={[
+        style,
         { height: pressableSize.m, marginBottom: spacing.m },
         styles.container
       ]}>
