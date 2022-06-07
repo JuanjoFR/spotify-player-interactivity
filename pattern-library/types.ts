@@ -6,6 +6,7 @@ interface Colors {
   primary: string;
   background: string;
   backgroundLight: string;
+  miniPlayerBackground: string;
   card: string;
   text: string;
   textLight: string;
@@ -36,14 +37,17 @@ interface Thumbnail {
   s: number;
   m: number;
   l: number;
+  xl: number;
 }
 
 interface Radius {
   s: number;
   m: number;
+  l: number;
 }
 
 interface IconSize {
+  s: number;
   m: number;
 }
 
@@ -68,4 +72,9 @@ export interface Preview {
   id: string;
   name: string;
   image: ImageSourcePropType;
+}
+
+export interface MiniPlayer {
+  artist: string;
+  song: string;
 }

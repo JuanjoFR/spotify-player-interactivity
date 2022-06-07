@@ -19,15 +19,15 @@ function MediumPreviewItem({ data, style, onPress }: ComponentProps) {
         <View
           style={[
             {
-              width: thumbnail.m
+              width: thumbnail.l
             },
             pressed ? { opacity: pressedOpacity } : null
           ]}>
           <Image
             source={data.image}
             style={{
-              width: thumbnail.m,
-              height: thumbnail.m,
+              width: thumbnail.l,
+              height: thumbnail.l,
               marginBottom: spacing.m
             }}
           />

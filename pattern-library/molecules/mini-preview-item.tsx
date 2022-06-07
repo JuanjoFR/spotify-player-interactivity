@@ -38,8 +38,8 @@ function MiniPreviewItem({ data, onPress }: ComponentProps) {
           <Image
             source={data.image}
             style={{
-              width: thumbnail.s,
-              height: thumbnail.s,
+              width: thumbnail.m,
+              height: thumbnail.m,
               borderTopLeftRadius: radius.s,
               borderBottomLeftRadius: radius.s,
               marginRight: spacing.m

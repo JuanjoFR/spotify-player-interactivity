@@ -3,7 +3,8 @@ import { Theme } from "./types";
 const palette = {
   white: "#FFFFFF",
   gray1: "#B3B3B3",
-  gray2: "#312A2C"
+  gray2: "#312A2C",
+  gray3: "#0E151E"
 };
 
 const theme: Theme = {
@@ -17,6 +18,7 @@ const theme: Theme = {
   colors: {
     background: "#121212",
     backgroundLight: palette.gray2,
+    miniPlayerBackground: palette.gray3,
     border: "rgb(39, 39, 41)",
     card: "rgb(18, 18, 18)",
     notification: "rgb(255, 69, 58)",
@@ -57,15 +59,18 @@ const theme: Theme = {
     }
   },
   thumbnail: {
-    s: 56,
-    m: 115,
-    l: 152
+    s: 39,
+    m: 56,
+    l: 115,
+    xl: 152
   },
   radius: {
     s: 4,
-    m: 10
+    m: 6,
+    l: 10
   },
   iconSize: {
+    s: 20,
     m: 24
   },
   pressableSize: {

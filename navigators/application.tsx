@@ -14,14 +14,38 @@ type NavigatorParamList = {
   Library: undefined;
 };
 
+interface Data {
+  artist: string;
+  song: string;
+}
+
+const data: Data = {
+  artist: "Sharon Van Etten",
+  song: "Mistakes"
+};
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 
 function Application() {
   const { spacing } = useTheme() as Theme;
 
+  function handleMiniPlayerDevicePress() {
+    console.log("handle mini player device press");
+  }
+
+  function handleMiniPlayerPlayPress() {
+    console.log("handle mini player play press");
+  }
+
   return (
     <Tab.Navigator
-      tabBar={props => <TabBar {...props} />}
+      tabBar={props => (
+        <TabBar
+          {...props}
+          data={data}
+          onMiniPlayerDevicePress={handleMiniPlayerDevicePress}
+          onMiniPlayerPlayPress={handleMiniPlayerPlayPress}
+        />
+      )}
       screenOptions={{
         headerShown: false
       }}>
