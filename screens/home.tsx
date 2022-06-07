@@ -52,17 +52,17 @@ const data: Data = {
     {
       id: "1",
       name: "Jam & Spoon, Blue Pearl, A Touch Of Class, Ultra Nate, Oceanic, De'Lacy, Brothers In Rhythm, 2 Unlimited, Snap",
-      image: require("../assets/images/Photo-from-Deposit-Photos.jpg")
+      image: require("../assets/images/Photo-from-Pixabay.jpg")
     },
     {
       id: "2",
       name: "Beastie Boys, Front Line Assembly, Stanford Prison Experiment, The Murmurs, Smashing Orange, Velo Deluxe",
-      image: require("../assets/images/739d013c-95b8-4edd-89ad-d536e65de2a6_rw_1920.jpg")
+      image: require("../assets/images/Photo-from-Deposit-Photos.jpg")
     },
     {
       id: "3",
       name: "RPM, One Cut, Beanz, Purple Penguin, Atari Safari (2), Numskullz, Junior Disprol",
-      image: require("../assets/images/53905caa-02d4-4176-97e0-21c7e288628b_rw_1920.jpg")
+      image: require("../assets/images/dce81cbb-e184-4b2e-addc-b43bd9f59247_rw_1920.jpg")
     },
     {
       id: "4",
@@ -72,7 +72,7 @@ const data: Data = {
     {
       id: "5",
       name: "Gerry Rafferty, Sounds Of Blackness, David Guetta, Degrees Of Motion, Break Machine, Chanelle, Sigala",
-      image: require("../assets/images/2c340c65-c161-4ec1-b827-ad7fdd2475c0_rw_1920.jpg")
+      image: require("../assets/images/c1e0c5af-e6d3-4e40-b8b0-7b62ad550d77_rw_1920.jpg")
     },
     {
       id: "6",
@@ -131,7 +131,7 @@ const data: Data = {
     {
       id: "1",
       name: "The White Stripes, PJ Harvey, Amy Winehouse, Psykick Lyrikah, Benjamin Biolay, Tunng",
-      image: require("../assets/images/Photo-from-Pixabay.jpg")
+      image: require("../assets/images/spotify-playlist-cover-woman-in-blue-with-headphones-032322.jpg")
     },
     {
       id: "2",
@@ -171,7 +171,7 @@ const data: Data = {
     {
       id: "9",
       name: "I:Cube, Barbara Tucker, Cassius, Superfunk, Soha, Bob Sinclar, Joe Smooth",
-      image: require("../assets/images/dce81cbb-e184-4b2e-addc-b43bd9f59247_rw_1920.jpg")
+      image: require("../assets/images/53905caa-02d4-4176-97e0-21c7e288628b_rw_1920.jpg")
     }
   ]
 };
