@@ -1,23 +1,34 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
+import { Dimensions, Platform, StyleSheet } from "react-native";
 import {
-  Dimensions,
-  Platform,
-  Pressable,
-  StyleSheet,
-  View
-} from "react-native";
+  PanGestureHandler,
+  PanGestureHandlerGestureEvent
+} from "react-native-gesture-handler";
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Label from "../atoms/label";
 import { MiniPlayer as IMiniPlayer, Theme } from "../types";
+import ApplicationBottomTab from "./application-bottom-tab";
 import MiniPlayer from "./mini-player";
+import Player from "./player";
 
 interface ComponentProps extends BottomTabBarProps {
   data: IMiniPlayer;
   onMiniPlayerDevicePress: () => void;
   onMiniPlayerPlayPress: () => void;
 }
+
+type AnimatedGHContext = {
+  startY: number;
+};
 
 const STATUS_BAR_HEIGHT = Platform.OS === "android" ? 24 : 0;
 const styles = StyleSheet.create({
@@ -28,30 +39,31 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0
   },
+  player: { flex: 1 },
+  miniPlayer: { position: "absolute", left: 0, right: 0 },
   tabBarContainer: {
     position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    justifyContent: "center",
-    transform: [{ translateY: 0 }]
-  },
-  tabBar: { flexDirection: "row" },
-  tabWrapper: { flex: 1 },
-  tab: { alignItems: "center" }
+    justifyContent: "center"
+  }
 });
 const { height } = Dimensions.get("window");
+const SNAP_TOP = 0;
+
+function clamp(value: number, min: number, max: number) {
+  "worklet";
+  return Math.min(Math.max(value, min), max);
+}
 
 function TabBar({
-  state,
-  descriptors,
-  navigation,
   data,
   onMiniPlayerDevicePress,
-  onMiniPlayerPlayPress
+  onMiniPlayerPlayPress,
+  ...rest
 }: ComponentProps) {
-  const { colors, iconSize, pressedOpacity, tabbarHeight, miniPlayerHeight } =
-    useTheme() as Theme;
+  const { colors, tabbarHeight, miniPlayerHeight } = useTheme() as Theme;
   const insets = useSafeAreaInsets();
   const SNAP_BOTTOM =
     height -
@@ -59,94 +71,116 @@ function TabBar({
     miniPlayerHeight -
     insets.bottom -
     STATUS_BAR_HEIGHT;
+  const translateY = useSharedValue(SNAP_BOTTOM);
+  const playersContainerAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }]
+    };
+  });
+  const miniPlayerAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        translateY.value,
+        [SNAP_BOTTOM, SNAP_BOTTOM - miniPlayerHeight],
+        [1, 0],
+        {
+          extrapolateLeft: Extrapolate.CLAMP,
+          extrapolateRight: Extrapolate.CLAMP
+        }
+      )
+    };
+  });
+  const playerAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        translateY.value,
+        [SNAP_BOTTOM, SNAP_BOTTOM - miniPlayerHeight],
+        [0, 1],
+        {
+          extrapolateLeft: Extrapolate.CLAMP,
+          extrapolateRight: Extrapolate.CLAMP
+        }
+      )
+    };
+  });
+  const tabbarAAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: interpolate(
+            translateY.value,
+            [SNAP_BOTTOM, SNAP_TOP],
+            [0, tabbarHeight + insets.bottom],
+            {
+              extrapolateLeft: Extrapolate.CLAMP,
+              extrapolateRight: Extrapolate.CLAMP
+            }
+          )
+        }
+      ]
+    };
+  });
+  const eventHandler = useAnimatedGestureHandler<
+    PanGestureHandlerGestureEvent,
+    AnimatedGHContext
+  >({
+    onStart: (_event, context) => {
+      console.log("start");
+
+      context.startY = translateY.value;
+    },
+    onActive: (event, context) => {
+      console.log("active");
+
+      translateY.value = clamp(
+        context.startY + event.translationY,
+        SNAP_TOP,
+        SNAP_BOTTOM
+      );
+    },
+    onEnd: event => {
+      console.log("end");
+
+      // config visualizer: https://mohit23x.github.io/reanimated-config-visualizer/
+      translateY.value = withSpring(SNAP_TOP, {
+        velocity: event.velocityY,
+        damping: 14,
+        mass: 0.2,
+        stiffness: 200
+      });
+    }
+  });
 
   return (
     <React.Fragment>
-      <View
-        style={[
-          styles.playersContainer,
-          {
-            transform: [{ translateY: SNAP_BOTTOM }]
-          }
-        ]}>
-        <MiniPlayer
-          data={data}
-          onDevicePress={onMiniPlayerDevicePress}
-          onPlayPress={onMiniPlayerPlayPress}
-        />
-      </View>
-      <View
+      <PanGestureHandler onGestureEvent={eventHandler}>
+        <Animated.View
+          style={[styles.playersContainer, playersContainerAnimatedStyle]}
+        >
+          <Animated.View style={[styles.player, playerAnimatedStyle]}>
+            <Player />
+          </Animated.View>
+          <Animated.View style={[styles.miniPlayer, miniPlayerAnimatedStyle]}>
+            <MiniPlayer
+              data={data}
+              onDevicePress={onMiniPlayerDevicePress}
+              onPlayPress={onMiniPlayerPlayPress}
+            />
+          </Animated.View>
+        </Animated.View>
+      </PanGestureHandler>
+      <Animated.View
         style={[
           styles.tabBarContainer,
           {
             height: tabbarHeight + insets.bottom,
             backgroundColor: colors.background
-          }
-        ]}>
-        <View style={[styles.tabBar, { marginBottom: insets.bottom }]}>
-          {state.routes.map((route, index) => {
-            const { options } = descriptors[route.key];
-            const label =
-              options.title !== undefined ? options.title : route.name;
-
-            const isFocused = state.index === index;
-
-            const onPress = () => {
-              const event = navigation.emit({
-                type: "tabPress",
-                target: route.key,
-                canPreventDefault: true
-              });
-
-              if (!isFocused && !event.defaultPrevented) {
-                navigation.navigate(route.name, { merge: true });
-              }
-            };
-
-            const onLongPress = () => {
-              navigation.emit({
-                type: "tabLongPress",
-                target: route.key
-              });
-            };
-
-            return (
-              <Pressable
-                key={index.toString()}
-                accessibilityRole="button"
-                accessibilityState={isFocused ? { selected: true } : {}}
-                accessibilityLabel={options.tabBarAccessibilityLabel}
-                testID={options.tabBarTestID}
-                onPress={onPress}
-                onLongPress={onLongPress}
-                style={styles.tabWrapper}>
-                {({ pressed }) => (
-                  <View
-                    style={[
-                      styles.tab,
-                      pressed ? { opacity: pressedOpacity } : null
-                    ]}>
-                    {options.tabBarIcon
-                      ? options.tabBarIcon({
-                          focused: isFocused,
-                          color: isFocused ? colors.text : colors.textLight,
-                          size: iconSize.m
-                        })
-                      : undefined}
-                    <Label
-                      variant="s"
-                      style={
-                        !isFocused ? { color: colors.textLight } : undefined
-                      }>
-                      {label}
-                    </Label>
-                  </View>
-                )}
-              </Pressable>
-            );
-          })}
-        </View>
-      </View>
+          },
+          tabbarAAnimatedStyle
+        ]}
+      >
+        <ApplicationBottomTab {...rest} />
+      </Animated.View>
     </React.Fragment>
   );
 }

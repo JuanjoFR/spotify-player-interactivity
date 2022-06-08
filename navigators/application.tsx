@@ -22,8 +22,8 @@ interface Data {
 }
 
 const data: Data = {
-  artist: "Sharon Van Etten",
-  song: "Mistakes",
+  artist: "Florence + The Machine, The Blessed Madonna",
+  song: "Free - The Blessed Madonna Remix",
   image: require("../assets/images/Photo-from-Pixabay.jpg")
 };
 const Tab = createBottomTabNavigator<NavigatorParamList>();
@@ -51,7 +51,8 @@ function Application() {
       )}
       screenOptions={{
         headerShown: false
-      }}>
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={HomeScreen}

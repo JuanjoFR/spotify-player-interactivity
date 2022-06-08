@@ -42,7 +42,8 @@ function MiniPlayer({ data, onDevicePress, onPlayPress }: ComponentProps) {
             borderRadius: radius.m,
             height: miniPlayerHeight
           }
-        ]}>
+        ]}
+      >
         <Image
           source={data.image}
           style={{
@@ -58,9 +59,14 @@ function MiniPlayer({ data, onDevicePress, onPlayPress }: ComponentProps) {
             {
               marginRight: spacing.m
             }
-          ]}>
-          <Label variant="m3">{data.song}</Label>
-          <Label variant="m2">{data.artist}</Label>
+          ]}
+        >
+          <Label variant="m3" numberOfLines={1}>
+            {data.song}
+          </Label>
+          <Label variant="m2" numberOfLines={1}>
+            {data.artist}
+          </Label>
         </View>
         <View style={styles.iconsContainer}>
           <Pressable
@@ -71,7 +77,8 @@ function MiniPlayer({ data, onDevicePress, onPlayPress }: ComponentProps) {
                 height: pressableSize.m
               }
             ]}
-            onPress={onDevicePress}>
+            onPress={onDevicePress}
+          >
             {({ pressed }) => (
               <Ionicons
                 name="tv-outline"
@@ -89,7 +96,8 @@ function MiniPlayer({ data, onDevicePress, onPlayPress }: ComponentProps) {
                 height: pressableSize.m
               }
             ]}
-            onPress={onPlayPress}>
+            onPress={onPlayPress}
+          >
             {({ pressed }) => (
               <Ionicons
                 name="play"
