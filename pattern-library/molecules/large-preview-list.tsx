@@ -21,7 +21,8 @@ function LargePreviewList({
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={contentContainerStyle}>
+      contentContainerStyle={contentContainerStyle}
+    >
       {data.map((item, index) => (
         <LargePreviewItem
           key={item.id}

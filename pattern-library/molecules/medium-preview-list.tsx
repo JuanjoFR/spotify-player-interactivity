@@ -21,7 +21,8 @@ function MediumPreviewList({
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={contentContainerStyle}>
+      contentContainerStyle={contentContainerStyle}
+    >
       {data.map((item, index) => (
         <MediumPreviewItem
           key={item.id}

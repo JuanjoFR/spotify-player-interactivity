@@ -41,14 +41,16 @@ function Home({
       indicatorStyle="white"
       contentContainerStyle={{
         paddingBottom: tabbarHeight + miniPlayerHeight + insets.bottom
-      }}>
+      }}
+    >
       <StatusBar barStyle="light-content" backgroundColor={colors.background} />
       <View
         style={{
           marginTop: insets.top,
           marginLeft: insets.left,
           marginRight: insets.right
-        }}>
+        }}
+      >
         <MiniPreview
           headerText="Good morning"
           data={data.mostPlayed}

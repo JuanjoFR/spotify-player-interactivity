@@ -33,7 +33,8 @@ function SectionActions({ config }: ComponentProps) {
         <Pressable
           key={item.iconName}
           style={[{ width: pressableSize.m }, styles.pressableIcon]}
-          onPress={item.action}>
+          onPress={item.action}
+        >
           {({ pressed }) => (
             <Ionicons
               name={item.iconName}

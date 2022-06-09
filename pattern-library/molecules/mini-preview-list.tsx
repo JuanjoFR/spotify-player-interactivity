@@ -34,7 +34,8 @@ function MiniPreviewList({ data, style, onItemPress }: ComponentProps) {
             index % 2 ? { paddingLeft: spacing.m / 2 } : null,
             !(index % 2) ? { paddingRight: spacing.m / 2 } : null,
             { marginBottom: spacing.m }
-          ]}>
+          ]}
+        >
           <MiniPreviewItem key={item.id} data={item} onPress={onItemPress} />
         </View>
       ))}

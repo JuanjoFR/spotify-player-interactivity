@@ -27,14 +27,16 @@ function MiniPreviewItem({ data, onPress }: ComponentProps) {
       onPress={() => onPress(data)}
       style={{
         borderRadius: radius.s
-      }}>
+      }}
+    >
       {({ pressed }) => (
         <View
           style={[
             { backgroundColor: colors.backgroundLight, borderRadius: radius.s },
             styles.container,
             pressed ? { opacity: pressedOpacity } : null
-          ]}>
+          ]}
+        >
           <Image
             source={data.image}
             style={{
@@ -48,7 +50,8 @@ function MiniPreviewItem({ data, onPress }: ComponentProps) {
           <Label
             variant="m1"
             numberOfLines={2}
-            style={[styles.label, { marginRight: spacing.m }]}>
+            style={[styles.label, { marginRight: spacing.m }]}
+          >
             {data.name}
           </Label>
         </View>

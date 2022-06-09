@@ -22,7 +22,8 @@ function MediumPreviewItem({ data, style, onPress }: ComponentProps) {
               width: thumbnail.l
             },
             pressed ? { opacity: pressedOpacity } : null
-          ]}>
+          ]}
+        >
           <Image
             source={data.image}
             style={{
