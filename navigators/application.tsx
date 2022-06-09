@@ -19,12 +19,14 @@ interface Data {
   artist: string;
   song: string;
   image: ImageSourcePropType;
+  duration: string;
 }
 
 const data: Data = {
   artist: "Florence + The Machine, The Blessed Madonna",
   song: "Free - The Blessed Madonna Remix",
-  image: require("../assets/images/Photo-from-Pixabay.jpg")
+  image: require("../assets/images/Photo-from-Pixabay.jpg"),
+  duration: "6:32"
 };
 const Tab = createBottomTabNavigator<NavigatorParamList>();
 
@@ -39,6 +41,34 @@ function Application() {
     console.log("handle mini player play press");
   }
 
+  function handlePlayerClosePress() {
+    console.log("handle player close press");
+  }
+
+  function handlePlayerFavouritePress() {
+    console.log("handle player favourite press");
+  }
+
+  function handlePlayerShufflePress() {
+    console.log("handle player shuffle press");
+  }
+
+  function handlePlayerSkipBackPress() {
+    console.log("handle player skip back press");
+  }
+
+  function handlePlayerPlayPress() {
+    console.log("handle player play press");
+  }
+
+  function handlePlayerSkipForwardPress() {
+    console.log("handle player skip forward press");
+  }
+
+  function handlePlayerRepeatPress() {
+    console.log("handle player repeat press");
+  }
+
   return (
     <Tab.Navigator
       tabBar={props => (
@@ -47,6 +77,13 @@ function Application() {
           data={data}
           onMiniPlayerDevicePress={handleMiniPlayerDevicePress}
           onMiniPlayerPlayPress={handleMiniPlayerPlayPress}
+          onClosePress={handlePlayerClosePress}
+          onFavouritePress={handlePlayerFavouritePress}
+          onShufflePress={handlePlayerShufflePress}
+          onSkipBackPress={handlePlayerSkipBackPress}
+          onPlayPress={handlePlayerPlayPress}
+          onSkipForwardPress={handlePlayerSkipForwardPress}
+          onRepeatPress={handlePlayerRepeatPress}
         />
       )}
       screenOptions={{

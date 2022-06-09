@@ -34,8 +34,9 @@ function SectionHeaderWithActions({
       style={[
         { height: pressableSize.m, marginBottom: spacing.m },
         styles.container
-      ]}>
-      <Title>{text}</Title>
+      ]}
+    >
+      <Title variant="m">{text}</Title>
       <SectionActions
         config={[
           { iconName: "notifications-outline", action: onNotificationsPress },

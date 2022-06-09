@@ -21,7 +21,8 @@ function LargePreviewItem({ data, style, onPress }: ComponentProps) {
           borderRadius: radius.l
         },
         style
-      ]}>
+      ]}
+    >
       {({ pressed }) => (
         <View
           style={[
@@ -30,7 +31,8 @@ function LargePreviewItem({ data, style, onPress }: ComponentProps) {
               borderRadius: radius.l
             },
             pressed ? { opacity: pressedOpacity } : null
-          ]}>
+          ]}
+        >
           <Image
             source={data.image}
             style={{

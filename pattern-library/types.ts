@@ -7,6 +7,7 @@ interface Colors {
   background: string;
   backgroundLight: string;
   miniPlayerBackground: string;
+  playerBackground: string;
   card: string;
   text: string;
   textLight: string;
@@ -22,15 +23,21 @@ interface Spacing {
   xl: number;
 }
 
-interface Label {
+interface Title {
   s: TextStyle;
+  m: TextStyle;
+}
+
+interface Label {
+  s1: TextStyle;
+  s2: TextStyle;
   m1: TextStyle;
   m2: TextStyle;
   m3: TextStyle;
 }
 
 interface Text {
-  title: TextStyle;
+  title: Title;
   label: Label;
 }
 
@@ -50,6 +57,8 @@ interface Radius {
 interface IconSize {
   s: number;
   m: number;
+  l: number;
+  xl: number;
 }
 
 interface PressableSize {
@@ -77,8 +86,9 @@ export interface Preview {
   image: ImageSourcePropType;
 }
 
-export interface MiniPlayer {
+export interface Detail {
   artist: string;
   song: string;
   image: ImageSourcePropType;
+  duration: string;
 }

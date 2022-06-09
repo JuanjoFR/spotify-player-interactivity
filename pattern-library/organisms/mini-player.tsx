@@ -3,10 +3,10 @@ import * as React from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Label from "../atoms/label";
-import { MiniPlayer as IMiniPlayer, Theme } from "../types";
+import { Detail, Theme } from "../types";
 
 interface ComponentProps {
-  data: IMiniPlayer;
+  data: Detail;
   onDevicePress: () => void;
   onPlayPress: () => void;
 }

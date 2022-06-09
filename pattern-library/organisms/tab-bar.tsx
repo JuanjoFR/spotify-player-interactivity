@@ -15,22 +15,33 @@ import Animated, {
   withSpring
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { MiniPlayer as IMiniPlayer, Theme } from "../types";
+import { Detail, Theme } from "../types";
 import ApplicationBottomTab from "./application-bottom-tab";
 import MiniPlayer from "./mini-player";
 import Player from "./player";
 
 interface ComponentProps extends BottomTabBarProps {
-  data: IMiniPlayer;
+  data: Detail;
   onMiniPlayerDevicePress: () => void;
   onMiniPlayerPlayPress: () => void;
+  onClosePress: () => void;
+  onFavouritePress: () => void;
+  onShufflePress: () => void;
+  onSkipBackPress: () => void;
+  onPlayPress: () => void;
+  onSkipForwardPress: () => void;
+  onRepeatPress: () => void;
 }
 
 type AnimatedGHContext = {
   startY: number;
 };
 
-const STATUS_BAR_HEIGHT = Platform.OS === "android" ? 24 : 0;
+const ANDROID_STATUS_BAR_HEIGHT = 24;
+const STATUS_BAR_HEIGHT =
+  Platform.OS === "android" ? ANDROID_STATUS_BAR_HEIGHT : 0;
+const { height } = Dimensions.get("window");
+const SNAP_TOP = 0;
 const styles = StyleSheet.create({
   playersContainer: {
     position: "absolute",
@@ -49,8 +60,6 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-const { height } = Dimensions.get("window");
-const SNAP_TOP = 0;
 
 function clamp(value: number, min: number, max: number) {
   "worklet";
@@ -61,6 +70,13 @@ function TabBar({
   data,
   onMiniPlayerDevicePress,
   onMiniPlayerPlayPress,
+  onClosePress,
+  onFavouritePress,
+  onShufflePress,
+  onSkipBackPress,
+  onPlayPress,
+  onSkipForwardPress,
+  onRepeatPress,
   ...rest
 }: ComponentProps) {
   const { colors, tabbarHeight, miniPlayerHeight } = useTheme() as Theme;
@@ -158,7 +174,16 @@ function TabBar({
           style={[styles.playersContainer, playersContainerAnimatedStyle]}
         >
           <Animated.View style={[styles.player, playerAnimatedStyle]}>
-            <Player />
+            <Player
+              data={data}
+              onClosePress={onClosePress}
+              onFavouritePress={onFavouritePress}
+              onShufflePress={onShufflePress}
+              onSkipBackPress={onSkipBackPress}
+              onPlayPress={onPlayPress}
+              onSkipForwardPress={onSkipForwardPress}
+              onRepeatPress={onRepeatPress}
+            />
           </Animated.View>
           <Animated.View style={[styles.miniPlayer, miniPlayerAnimatedStyle]}>
             <MiniPlayer

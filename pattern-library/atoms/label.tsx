@@ -4,7 +4,7 @@ import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 import { Theme } from "../types";
 
 interface ComponentProps extends TextProps {
-  variant: "s" | "m1" | "m2" | "m3";
+  variant: "s1" | "s2" | "m1" | "m2" | "m3";
   style?: StyleProp<TextStyle>;
   children: string;
 }

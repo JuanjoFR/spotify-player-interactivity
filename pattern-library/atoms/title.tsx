@@ -1,20 +1,22 @@
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 import { Theme } from "../types";
 
-interface ComponentProps {
+interface ComponentProps extends TextProps {
+  variant: "s" | "m";
+  style?: StyleProp<TextStyle>;
   children: string;
 }
 
-const styles = StyleSheet.create({
-  text: {}
-});
-
-function Title({ children }: ComponentProps) {
+function Title({ variant, style, children, ...rest }: ComponentProps) {
   const { text } = useTheme() as Theme;
 
-  return <Text style={[text.title, styles.text]}>{children}</Text>;
+  return (
+    <Text {...rest} style={[text.title[variant], style]}>
+      {children}
+    </Text>
+  );
 }
 
 export default Title;

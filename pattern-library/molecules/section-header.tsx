@@ -27,8 +27,9 @@ function SectionHeader({ text, style }: ComponentProps) {
         style,
         { height: pressableSize.m, marginBottom: spacing.m },
         styles.container
-      ]}>
-      <Title>{text}</Title>
+      ]}
+    >
+      <Title variant="m">{text}</Title>
     </View>
   );
 }

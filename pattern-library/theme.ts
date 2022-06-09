@@ -2,6 +2,7 @@ import { Theme } from "./types";
 
 const palette = {
   white: "#FFFFFF",
+  green: "#65D46E",
   gray1: "#B3B3B3",
   gray2: "#3E434B",
   gray3: "#312A2C",
@@ -20,23 +21,37 @@ const theme: Theme = {
     background: "#121212",
     backgroundLight: palette.gray3,
     miniPlayerBackground: palette.gray4,
+    playerBackground: palette.gray4,
     border: "rgb(39, 39, 41)",
     card: "rgb(18, 18, 18)",
     notification: "rgb(255, 69, 58)",
-    primary: "rgb(10, 132, 255)",
+    primary: palette.green,
     text: palette.white,
     textLight: palette.gray1,
     progressBackground: palette.gray2
   },
   text: {
     title: {
-      color: palette.white,
-      fontSize: 22,
-      fontWeight: "700"
-    },
-    label: {
       s: {
         color: palette.white,
+        fontSize: 12,
+        fontWeight: "700",
+        lineHeight: 20
+      },
+      m: {
+        color: palette.white,
+        fontSize: 22,
+        fontWeight: "700"
+      }
+    },
+    label: {
+      s1: {
+        color: palette.white,
+        fontSize: 11,
+        fontWeight: "400"
+      },
+      s2: {
+        color: palette.gray1,
         fontSize: 11,
         fontWeight: "400"
       },
@@ -73,7 +88,9 @@ const theme: Theme = {
   },
   iconSize: {
     s: 20,
-    m: 24
+    m: 24,
+    l: 34,
+    xl: 64
   },
   pressableSize: {
     m: 48

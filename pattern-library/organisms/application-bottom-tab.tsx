@@ -56,13 +56,15 @@ function ApplicationBottomTab({
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={styles.tabWrapper}>
+            style={styles.tabWrapper}
+          >
             {({ pressed }) => (
               <View
                 style={[
                   styles.tab,
                   pressed ? { opacity: pressedOpacity } : null
-                ]}>
+                ]}
+              >
                 {options.tabBarIcon
                   ? options.tabBarIcon({
                       focused: isFocused,
@@ -71,8 +73,9 @@ function ApplicationBottomTab({
                     })
                   : undefined}
                 <Label
-                  variant="s"
-                  style={!isFocused ? { color: colors.textLight } : undefined}>
+                  variant="s1"
+                  style={!isFocused ? { color: colors.textLight } : undefined}
+                >
                   {label}
                 </Label>
               </View>
