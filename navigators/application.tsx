@@ -45,6 +45,10 @@ function Application() {
     console.log("handle player close press");
   }
 
+  function handlePlayerSettingsPress() {
+    console.log("handle player settings press");
+  }
+
   function handlePlayerFavouritePress() {
     console.log("handle player favourite press");
   }
@@ -77,13 +81,14 @@ function Application() {
           data={data}
           onMiniPlayerDevicePress={handleMiniPlayerDevicePress}
           onMiniPlayerPlayPress={handleMiniPlayerPlayPress}
-          onClosePress={handlePlayerClosePress}
-          onFavouritePress={handlePlayerFavouritePress}
-          onShufflePress={handlePlayerShufflePress}
-          onSkipBackPress={handlePlayerSkipBackPress}
-          onPlayPress={handlePlayerPlayPress}
-          onSkipForwardPress={handlePlayerSkipForwardPress}
-          onRepeatPress={handlePlayerRepeatPress}
+          onPlayerClosePress={handlePlayerClosePress}
+          onPlayerSettingsPress={handlePlayerSettingsPress}
+          onPlayerFavouritePress={handlePlayerFavouritePress}
+          onPlayerShufflePress={handlePlayerShufflePress}
+          onPlayerSkipBackPress={handlePlayerSkipBackPress}
+          onPlayerPlayPress={handlePlayerPlayPress}
+          onPlayerSkipForwardPress={handlePlayerSkipForwardPress}
+          onPlayerRepeatPress={handlePlayerRepeatPress}
         />
       )}
       screenOptions={{

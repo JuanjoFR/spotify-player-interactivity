@@ -8,6 +8,7 @@ import { Theme } from "../types";
 interface ComponentProps {
   title: string;
   onClosePress: () => void;
+  onSettingsPress: () => void;
 }
 
 const styles = StyleSheet.create({
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function PageHeader({ title, onClosePress }: ComponentProps) {
+function PageHeader({ title, onClosePress, onSettingsPress }: ComponentProps) {
   const { colors, iconSize, pressableSize, pressedOpacity } =
     useTheme() as Theme;
 
@@ -56,7 +57,7 @@ function PageHeader({ title, onClosePress }: ComponentProps) {
             height: pressableSize.m
           }
         ]}
-        onPress={onClosePress}
+        onPress={onSettingsPress}
       >
         {({ pressed }) => (
           <Ionicons

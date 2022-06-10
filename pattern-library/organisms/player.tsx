@@ -11,6 +11,7 @@ import PageHeader from "./page-header";
 interface ComponentProps {
   data: Detail;
   onClosePress: () => void;
+  onSettingsPress: () => void;
   onFavouritePress: () => void;
   onShufflePress: () => void;
   onSkipBackPress: () => void;
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
 function Player({
   data,
   onClosePress,
+  onSettingsPress,
   onFavouritePress,
   onShufflePress,
   onSkipBackPress,
@@ -60,7 +62,11 @@ function Player({
       edges={["top", "right", "bottom", "left"]}
       style={[styles.safeArea, { backgroundColor: colors.playerBackground }]}
     >
-      <PageHeader title="Liked Songs" onClosePress={onClosePress} />
+      <PageHeader
+        title="Liked Songs"
+        onClosePress={onClosePress}
+        onSettingsPress={onSettingsPress}
+      />
       <View
         style={[
           styles.container,

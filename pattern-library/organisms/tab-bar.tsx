@@ -1,7 +1,7 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { Dimensions, StatusBar, StyleSheet } from "react-native";
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent
@@ -9,6 +9,7 @@ import {
 import Animated, {
   Extrapolate,
   interpolate,
+  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -24,22 +25,21 @@ interface ComponentProps extends BottomTabBarProps {
   data: Detail;
   onMiniPlayerDevicePress: () => void;
   onMiniPlayerPlayPress: () => void;
-  onClosePress: () => void;
-  onFavouritePress: () => void;
-  onShufflePress: () => void;
-  onSkipBackPress: () => void;
-  onPlayPress: () => void;
-  onSkipForwardPress: () => void;
-  onRepeatPress: () => void;
+  onPlayerClosePress: () => void;
+  onPlayerSettingsPress: () => void;
+  onPlayerFavouritePress: () => void;
+  onPlayerShufflePress: () => void;
+  onPlayerSkipBackPress: () => void;
+  onPlayerPlayPress: () => void;
+  onPlayerSkipForwardPress: () => void;
+  onPlayerRepeatPress: () => void;
 }
 
 type AnimatedGHContext = {
   startY: number;
 };
 
-const ANDROID_STATUS_BAR_HEIGHT = 24;
-const STATUS_BAR_HEIGHT =
-  Platform.OS === "android" ? ANDROID_STATUS_BAR_HEIGHT : 0;
+const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 0;
 const { height } = Dimensions.get("window");
 const SNAP_TOP = 0;
 const styles = StyleSheet.create({
@@ -70,16 +70,18 @@ function TabBar({
   data,
   onMiniPlayerDevicePress,
   onMiniPlayerPlayPress,
-  onClosePress,
-  onFavouritePress,
-  onShufflePress,
-  onSkipBackPress,
-  onPlayPress,
-  onSkipForwardPress,
-  onRepeatPress,
+  onPlayerClosePress,
+  onPlayerSettingsPress,
+  onPlayerFavouritePress,
+  onPlayerShufflePress,
+  onPlayerSkipBackPress,
+  onPlayerPlayPress,
+  onPlayerSkipForwardPress,
+  onPlayerRepeatPress,
   ...rest
 }: ComponentProps) {
-  const { colors, tabbarHeight, miniPlayerHeight } = useTheme() as Theme;
+  const { colors, tabbarHeight, miniPlayerHeight, pressableSize } =
+    useTheme() as Theme;
   const insets = useSafeAreaInsets();
   const SNAP_BOTTOM =
     height -
@@ -87,7 +89,8 @@ function TabBar({
     miniPlayerHeight -
     insets.bottom -
     STATUS_BAR_HEIGHT;
-  const translateY = useSharedValue(SNAP_BOTTOM);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const translateY = useSharedValue(isOpen ? SNAP_TOP : SNAP_BOTTOM);
   const playersContainerAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }]
@@ -141,13 +144,9 @@ function TabBar({
     AnimatedGHContext
   >({
     onStart: (_event, context) => {
-      console.log("start");
-
       context.startY = translateY.value;
     },
     onActive: (event, context) => {
-      console.log("active");
-
       translateY.value = clamp(
         context.startY + event.translationY,
         SNAP_TOP,
@@ -155,17 +154,50 @@ function TabBar({
       );
     },
     onEnd: event => {
-      console.log("end");
-
       // config visualizer: https://mohit23x.github.io/reanimated-config-visualizer/
-      translateY.value = withSpring(SNAP_TOP, {
+      const springConfig = {
         velocity: event.velocityY,
         damping: 14,
         mass: 0.2,
         stiffness: 200
-      });
+      };
+
+      if (Math.abs(event.translationY) > pressableSize.m * 2) {
+        if (isOpen) {
+          console.log("close player");
+
+          translateY.value = withSpring(SNAP_BOTTOM, springConfig);
+          runOnJS(setIsOpen)(false);
+        } else {
+          console.log("open player");
+
+          translateY.value = withSpring(SNAP_TOP, springConfig);
+          runOnJS(setIsOpen)(true);
+        }
+      } else {
+        if (isOpen) {
+          console.log("return to open player");
+
+          translateY.value = withSpring(SNAP_TOP, springConfig);
+        } else {
+          console.log("return to close player");
+
+          translateY.value = withSpring(SNAP_BOTTOM, springConfig);
+        }
+      }
     }
   });
+
+  function handlePlayerClosePress() {
+    translateY.value = withSpring(SNAP_BOTTOM, {
+      damping: 14,
+      mass: 0.2,
+      stiffness: 200
+    });
+    runOnJS(setIsOpen)(false);
+
+    onPlayerClosePress();
+  }
 
   return (
     <React.Fragment>
@@ -173,19 +205,26 @@ function TabBar({
         <Animated.View
           style={[styles.playersContainer, playersContainerAnimatedStyle]}
         >
-          <Animated.View style={[styles.player, playerAnimatedStyle]}>
+          <Animated.View
+            pointerEvents={isOpen ? "auto" : "none"}
+            style={[styles.player, playerAnimatedStyle]}
+          >
             <Player
               data={data}
-              onClosePress={onClosePress}
-              onFavouritePress={onFavouritePress}
-              onShufflePress={onShufflePress}
-              onSkipBackPress={onSkipBackPress}
-              onPlayPress={onPlayPress}
-              onSkipForwardPress={onSkipForwardPress}
-              onRepeatPress={onRepeatPress}
+              onClosePress={handlePlayerClosePress}
+              onSettingsPress={onPlayerSettingsPress}
+              onFavouritePress={onPlayerFavouritePress}
+              onShufflePress={onPlayerShufflePress}
+              onSkipBackPress={onPlayerSkipBackPress}
+              onPlayPress={onPlayerPlayPress}
+              onSkipForwardPress={onPlayerSkipForwardPress}
+              onRepeatPress={onPlayerRepeatPress}
             />
           </Animated.View>
-          <Animated.View style={[styles.miniPlayer, miniPlayerAnimatedStyle]}>
+          <Animated.View
+            pointerEvents={isOpen ? "none" : "auto"}
+            style={[styles.miniPlayer, miniPlayerAnimatedStyle]}
+          >
             <MiniPlayer
               data={data}
               onDevicePress={onMiniPlayerDevicePress}
