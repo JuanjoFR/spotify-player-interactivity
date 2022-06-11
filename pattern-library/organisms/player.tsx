@@ -1,6 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { Image, StyleSheet, View } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PlayControls from "../molecules/play-controls";
 import PlayingInfo from "../molecules/playing-info";
@@ -21,6 +22,7 @@ interface ComponentProps {
 }
 
 const styles = StyleSheet.create({
+  gradient: { flex: 1 },
   safeArea: { flex: 1 },
   container: {
     display: "flex",
@@ -58,51 +60,59 @@ function Player({
   const { spacing, colors } = useTheme() as Theme;
 
   return (
-    <SafeAreaView
-      edges={["top", "right", "bottom", "left"]}
-      style={[styles.safeArea, { backgroundColor: colors.playerBackground }]}
+    <LinearGradient
+      start={{ x: 0.0, y: 0.0 }}
+      end={{ x: 1.0, y: 1.0 }}
+      locations={[0, 0.5]}
+      colors={[colors.playerBackgroundContextual, colors.playerBackground]}
+      style={styles.gradient}
     >
-      <PageHeader
-        title="Liked Songs"
-        onClosePress={onClosePress}
-        onSettingsPress={onSettingsPress}
-      />
-      <View
-        style={[
-          styles.container,
-          {
-            marginHorizontal: spacing.l,
-            marginBottom: spacing.xl
-          }
-        ]}
+      <SafeAreaView
+        edges={["top", "right", "bottom", "left"]}
+        style={[styles.safeArea]}
       >
-        <View style={[styles.coverContainer, { marginBottom: spacing.xl }]}>
-          <Image
-            source={data.image}
-            resizeMode="contain"
-            style={[styles.cover]}
-          />
+        <PageHeader
+          title="Liked Songs"
+          onClosePress={onClosePress}
+          onSettingsPress={onSettingsPress}
+        />
+        <View
+          style={[
+            styles.container,
+            {
+              marginHorizontal: spacing.l,
+              marginBottom: spacing.xl
+            }
+          ]}
+        >
+          <View style={[styles.coverContainer, { marginBottom: spacing.xl }]}>
+            <Image
+              source={data.image}
+              resizeMode="contain"
+              style={[styles.cover]}
+            />
+          </View>
+          <View>
+            <PlayingInfo
+              data={data}
+              style={{ marginBottom: spacing.xl }}
+              onFavouritePress={onFavouritePress}
+            />
+            <ProgressBar
+              duration={data.duration}
+              style={{ marginBottom: spacing.xl }}
+            />
+            <PlayControls
+              onShufflePress={onShufflePress}
+              onSkipBackPress={onSkipBackPress}
+              onPlayPress={onPlayPress}
+              onSkipForwardPress={onSkipForwardPress}
+              onRepeatPress={onRepeatPress}
+            />
+          </View>
         </View>
-        <View>
-          <PlayingInfo
-            data={data}
-            style={{ marginBottom: spacing.xl }}
-            onFavouritePress={onFavouritePress}
-          />
-          <ProgressBar
-            duration={data.duration}
-            style={{ marginBottom: spacing.xl }}
-          />
-          <PlayControls
-            onShufflePress={onShufflePress}
-            onSkipBackPress={onSkipBackPress}
-            onPlayPress={onPlayPress}
-            onSkipForwardPress={onSkipForwardPress}
-            onRepeatPress={onRepeatPress}
-          />
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 

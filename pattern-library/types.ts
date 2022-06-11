@@ -8,6 +8,7 @@ interface Colors {
   backgroundLight: string;
   miniPlayerBackground: string;
   playerBackground: string;
+  playerBackgroundContextual: string;
   card: string;
   text: string;
   textLight: string;

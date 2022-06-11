@@ -6,7 +6,8 @@ const palette = {
   gray1: "#B3B3B3",
   gray2: "#3E434B",
   gray3: "#312A2C",
-  gray4: "#0E151E"
+  gray4: "#0E151E",
+  pink: "#643264"
 };
 
 const theme: Theme = {
@@ -22,6 +23,7 @@ const theme: Theme = {
     backgroundLight: palette.gray3,
     miniPlayerBackground: palette.gray4,
     playerBackground: palette.gray4,
+    playerBackgroundContextual: palette.pink,
     border: "rgb(39, 39, 41)",
     card: "rgb(18, 18, 18)",
     notification: "rgb(255, 69, 58)",
