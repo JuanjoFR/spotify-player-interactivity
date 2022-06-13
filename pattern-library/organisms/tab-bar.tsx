@@ -154,6 +154,7 @@ function TabBar({
       );
     },
     onEnd: event => {
+      // check this tutorial: https://blog.swmansion.com/building-reigns-how-to-reign-over-mobile-game-development-using-reanimated-2-pa-55ae2017df50
       // config visualizer: https://mohit23x.github.io/reanimated-config-visualizer/
       const springConfig = {
         velocity: event.velocityY,
@@ -161,24 +162,26 @@ function TabBar({
         mass: 0.2,
         stiffness: 200
       };
+      const time = 0.2;
+      const tossY = event.translationY + time * event.velocityY;
 
-      if (Math.abs(event.translationY) > pressableSize.m * 2) {
-        if (isOpen) {
+      if (isOpen) {
+        if (tossY > pressableSize.m * 2) {
           console.log("close player");
 
           translateY.value = withSpring(SNAP_BOTTOM, springConfig);
           runOnJS(setIsOpen)(false);
         } else {
+          console.log("return to open player");
+
+          translateY.value = withSpring(SNAP_TOP, springConfig);
+        }
+      } else {
+        if (tossY < pressableSize.m * 2 * -1) {
           console.log("open player");
 
           translateY.value = withSpring(SNAP_TOP, springConfig);
           runOnJS(setIsOpen)(true);
-        }
-      } else {
-        if (isOpen) {
-          console.log("return to open player");
-
-          translateY.value = withSpring(SNAP_TOP, springConfig);
         } else {
           console.log("return to close player");
 
